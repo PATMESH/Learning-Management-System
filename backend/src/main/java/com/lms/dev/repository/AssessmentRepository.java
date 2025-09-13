@@ -1,12 +1,12 @@
-package com.example.demo.repository;
+package com.lms.dev.repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.demo.entity.Assessment;
-import com.example.demo.entity.Course;
-import com.example.demo.entity.User;
+import com.lms.dev.entity.Assessment;
+import com.lms.dev.entity.Course;
+import com.lms.dev.entity.User;
 
 public interface AssessmentRepository extends JpaRepository<Assessment, Long> {
 

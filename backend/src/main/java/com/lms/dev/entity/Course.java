@@ -1,12 +1,18 @@
-package com.example.demo.entity;
+package com.lms.dev.entity;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,78 +36,4 @@ public class Course {
     @OneToMany(mappedBy = "course")
     @JsonIgnore
     private List<Questions> questions;
-
-	public List<Questions> getQuestions() {
-		return questions;
-	}
-
-	public void setQuestions(List<Questions> questions) {
-		this.questions = questions;
-	}
-
-	public Long getId() {
-		return course_id;
-	}
-
-	public void setId(Long id) {
-		this.course_id = id;
-	}
-
-	public String getCourseName() {
-		return course_name;
-	}
-
-	public void setCourseName(String courseName) {
-		this.course_name = courseName;
-	}
-
-	public List<Feedback> getFeedbacks() {
-		return feedbacks;
-	}
-
-	public void setFeedbacks(List<Feedback> feedbacks) {
-		this.feedbacks = feedbacks;
-	}
-
-	public String getPhoto() {
-		return p_link;
-	}
-
-	public void setPhoto(String photo) {
-		this.p_link = photo;
-	}
-
-	public String getVideo() {
-		return y_link;
-	}
-
-	public void setVideo(String video) {
-		this.y_link = video;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-	public String getTutor() {
-		return instructor;
-	}
-
-	public void setTutor(String tutor) {
-		this.instructor = tutor;
-	}
-
-    
 }

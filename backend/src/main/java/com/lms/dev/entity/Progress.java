@@ -1,8 +1,13 @@
-package com.example.demo.entity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package com.lms.dev.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Progress {
     @Id
@@ -19,46 +24,4 @@ public class Progress {
 
     private float playedTime;
     private float duration;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Course getCourse() {
-		return course;
-	}
-
-	public void setCourse(Course course) {
-		this.course = course;
-	}
-
-	public float getPlayedTime() {
-		return playedTime;
-	}
-
-	public void setPlayedTime(float playedTime) {
-		this.playedTime = playedTime;
-	}
-
-	public float getDuration() {
-		return duration;
-	}
-
-	public void setDuration(float duration) {
-		this.duration = duration;
-	}
-
-	
 }

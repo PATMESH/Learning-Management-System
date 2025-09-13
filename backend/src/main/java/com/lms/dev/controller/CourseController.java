@@ -1,11 +1,11 @@
-package com.example.demo.controller;
+package com.lms.dev.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.entity.Course;
-import com.example.demo.service.CourseService;
+import com.lms.dev.entity.Course;
+import com.lms.dev.service.CourseService;
 
 @RestController
 @RequestMapping("/api/courses")

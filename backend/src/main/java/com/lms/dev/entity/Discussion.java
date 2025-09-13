@@ -1,6 +1,14 @@
-package com.example.demo.entity;
+package com.lms.dev.entity;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Discussion {
 
@@ -12,40 +20,16 @@ public class Discussion {
     @JoinColumn(name = "course_id")
     private Course course;
 
-    private String uName;
+    private String userName;
 
     private String content;
 
-	public Long getId() {
-		return id;
-	}
+    @Column(updatable = false)
+    private LocalDateTime time;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Course getCourse() {
-		return course;
-	}
-
-	public void setCourse(Course course) {
-		this.course = course;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public String getuName() {
-		return uName;
-	}
-
-	public void setuName(String uName) {
-		this.uName = uName;
-	}
+    @PrePersist
+    protected void onCreate() {
+        this.time = LocalDateTime.now();
+    }
 }
 

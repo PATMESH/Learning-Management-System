@@ -1,28 +1,27 @@
-package com.example.demo.service;
+package com.lms.dev.service;
 
 
-import com.example.demo.entity.User;
+import com.lms.dev.entity.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dto.CartRequest;
-import com.example.demo.entity.Cart;
-import com.example.demo.entity.Course;
-import com.example.demo.repository.CartRepository;
-import com.example.demo.repository.CourseRepository;
-import com.example.demo.repository.UserRepository;
+import com.lms.dev.dto.CartRequest;
+import com.lms.dev.entity.Cart;
+import com.lms.dev.entity.Course;
+import com.lms.dev.repository.CartRepository;
+import com.lms.dev.repository.CourseRepository;
+import com.lms.dev.repository.UserRepository;
 
+@RequiredArgsConstructor
 @Service
 public class CartService {
 
-    @Autowired
-    private CartRepository cartRepository;
+    private final CartRepository cartRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private CourseRepository courseRepository;
+    private final CourseRepository courseRepository;
 
     public Cart addToCart(CartRequest cartRequest) {
         User user = userRepository.findById(cartRequest.getUserId()).orElse(null);

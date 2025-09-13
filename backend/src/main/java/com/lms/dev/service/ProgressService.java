@@ -1,29 +1,28 @@
-package com.example.demo.service;
+package com.lms.dev.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dto.ProgressRequest;
-import com.example.demo.entity.Course;
-import com.example.demo.entity.Progress;
-import com.example.demo.entity.User;
-import com.example.demo.repository.CourseRepository;
-import com.example.demo.repository.ProgressRepository;
-import com.example.demo.repository.UserRepository;
+import com.lms.dev.dto.ProgressRequest;
+import com.lms.dev.entity.Course;
+import com.lms.dev.entity.Progress;
+import com.lms.dev.entity.User;
+import com.lms.dev.repository.CourseRepository;
+import com.lms.dev.repository.ProgressRepository;
+import com.lms.dev.repository.UserRepository;
 
+@RequiredArgsConstructor
 @Service
 public class ProgressService {
 
-    @Autowired
-    private ProgressRepository progressRepository;
+    private final ProgressRepository progressRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private CourseRepository courseRepository;
+    private final CourseRepository courseRepository;
 
     public ResponseEntity<String> updateProgress(ProgressRequest request) {
         Long userId = request.getUserId();

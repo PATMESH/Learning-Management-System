@@ -8,7 +8,7 @@
 		<version>3.2.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
+	<groupId>com.lms</groupId>
 	<artifactId>Learning-Management-System</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Learning-Management-System</name>

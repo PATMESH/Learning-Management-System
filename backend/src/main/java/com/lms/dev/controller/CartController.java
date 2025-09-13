@@ -1,11 +1,11 @@
-package com.example.demo.controller;
+package com.lms.dev.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.dto.CartRequest;
-import com.example.demo.entity.Cart;
-import com.example.demo.service.CartService;
+import com.lms.dev.dto.CartRequest;
+import com.lms.dev.entity.Cart;
+import com.lms.dev.service.CartService;
 
 @RestController
 @RequestMapping("/api/carts")

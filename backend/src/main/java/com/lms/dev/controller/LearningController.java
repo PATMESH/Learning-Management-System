@@ -1,11 +1,11 @@
-package com.example.demo.controller;
+package com.lms.dev.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.dto.EnrollRequest;
-import com.example.demo.entity.Course;
-import com.example.demo.entity.Learning;
-import com.example.demo.service.LearningService;
+import com.lms.dev.dto.EnrollRequest;
+import com.lms.dev.entity.Course;
+import com.lms.dev.entity.Learning;
+import com.lms.dev.service.LearningService;
 
 import java.util.List;
 

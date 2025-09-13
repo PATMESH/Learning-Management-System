@@ -1,10 +1,10 @@
-package com.example.demo.controller;
+package com.lms.dev.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.dto.FeedbackRequest;
-import com.example.demo.entity.Feedback;
-import com.example.demo.service.FeedbackService;
+import com.lms.dev.dto.FeedbackRequest;
+import com.lms.dev.entity.Feedback;
+import com.lms.dev.service.FeedbackService;
 
 import java.util.List;
 

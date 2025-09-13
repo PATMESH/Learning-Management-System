@@ -1,18 +1,19 @@
-package com.example.demo.service;
+package com.lms.dev.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.User;
-import com.example.demo.repository.UserRepository;
+import com.lms.dev.entity.User;
+import com.lms.dev.repository.UserRepository;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -31,6 +32,12 @@ public class UserService {
         if (existingUser != null) {
             existingUser.setUsername(updatedUser.getUsername());
             existingUser.setEmail(updatedUser.getEmail());
+            existingUser.setDob(updatedUser.getDob());
+            existingUser.setGender(updatedUser.getGender());
+            existingUser.setLocation(updatedUser.getLocation());
+            existingUser.setProfession(updatedUser.getProfession());
+            existingUser.setLinkedin_url(updatedUser.getLinkedin_url());
+            existingUser.setGithub_url(updatedUser.getGithub_url());
             return userRepository.save(existingUser);
         }
         return null;

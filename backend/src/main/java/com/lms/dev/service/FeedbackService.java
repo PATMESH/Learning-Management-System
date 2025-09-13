@@ -1,21 +1,22 @@
-package com.example.demo.service;
+package com.lms.dev.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dto.FeedbackRequest;
-import com.example.demo.entity.Course;
-import com.example.demo.entity.Feedback;
-import com.example.demo.repository.CourseRepository;
-import com.example.demo.repository.FeedbackRepository;
+import com.lms.dev.dto.FeedbackRequest;
+import com.lms.dev.entity.Course;
+import com.lms.dev.entity.Feedback;
+import com.lms.dev.repository.CourseRepository;
+import com.lms.dev.repository.FeedbackRepository;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class FeedbackService {
 
-    @Autowired
-    private FeedbackRepository feedbackRepository;
+    private final FeedbackRepository feedbackRepository;
 
 
     @Autowired

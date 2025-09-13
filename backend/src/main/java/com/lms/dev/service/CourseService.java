@@ -1,46 +1,47 @@
-package com.example.demo.service;
+package com.lms.dev.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.Course;
-import com.example.demo.repository.CourseRepository;
+import com.lms.dev.entity.Course;
+import com.lms.dev.repository.CourseRepository;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class CourseService {
 
-@Autowired
-private CourseRepository courseRepository;
+    private final CourseRepository courseRepository;
 
-public List<Course> getAllCourses() {
-    return courseRepository.findAll();
-}
-
-public Course getCourseById(Long id) {
-    return courseRepository.findById(id).orElse(null);
-}
-
-public Course createCourse(Course course) {
-    return courseRepository.save(course);
-}
-
-public Course updateCourse(Long id, Course updatedCourse) {
-    Course existingCourse = courseRepository.findById(id).orElse(null);
-    if (existingCourse != null) {
-        existingCourse.setCourseName(updatedCourse.getCourseName());
-        existingCourse.setDescription(updatedCourse.getDescription());
-        existingCourse.setPhoto(updatedCourse.getPhoto());
-        existingCourse.setPrice(updatedCourse.getPrice());
-        existingCourse.setTutor(updatedCourse.getTutor());
-        existingCourse.setVideo(updatedCourse.getVideo());
-        return courseRepository.save(existingCourse);
+    public List<Course> getAllCourses() {
+        return courseRepository.findAll();
     }
-    return null;
-}
 
-public void deleteCourse(Long id) {
-    courseRepository.deleteById(id);
-}
+    public Course getCourseById(Long id) {
+        return courseRepository.findById(id).orElse(null);
+    }
+
+    public Course createCourse(Course course) {
+        return courseRepository.save(course);
+    }
+
+    public Course updateCourse(Long id, Course updatedCourse) {
+        Course existingCourse = courseRepository.findById(id).orElse(null);
+        if (existingCourse != null) {
+            existingCourse.setCourse_name(updatedCourse.getCourse_name());
+            existingCourse.setDescription(updatedCourse.getDescription());
+            existingCourse.setP_link(updatedCourse.getP_link());
+            existingCourse.setPrice(updatedCourse.getPrice());
+            existingCourse.setInstructor(updatedCourse.getInstructor());
+            existingCourse.setY_link(updatedCourse.getY_link());
+            return courseRepository.save(existingCourse);
+        }
+        return null;
+    }
+
+    public void deleteCourse(Long id) {
+        courseRepository.deleteById(id);
+    }
 }

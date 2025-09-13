@@ -1,32 +1,30 @@
-package com.example.demo.service;
+package com.lms.dev.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.demo.dto.EnrollRequest;
-import com.example.demo.entity.Course;
-import com.example.demo.entity.Learning;
-import com.example.demo.entity.Progress;
-import com.example.demo.entity.User;
-import com.example.demo.repository.CourseRepository;
-import com.example.demo.repository.LearningRepository;
-import com.example.demo.repository.ProgressRepository;
-import com.example.demo.repository.UserRepository;
+import com.lms.dev.dto.EnrollRequest;
+import com.lms.dev.entity.Course;
+import com.lms.dev.entity.Learning;
+import com.lms.dev.entity.Progress;
+import com.lms.dev.entity.User;
+import com.lms.dev.repository.CourseRepository;
+import com.lms.dev.repository.LearningRepository;
+import com.lms.dev.repository.ProgressRepository;
+import com.lms.dev.repository.UserRepository;
 import java.util.*;
 
+@RequiredArgsConstructor
 @Service
 public class LearningService {
 
-    @Autowired
-    private LearningRepository learningRepository;
+    private final LearningRepository learningRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private CourseRepository courseRepository;
+    private final CourseRepository courseRepository;
     
-    @Autowired
-    private ProgressRepository progressRepository;
+    private final ProgressRepository progressRepository;
 
     public List<Course> getLearningCourses(Long userId) {
         Optional<User> optionalUser = userRepository.findById(userId);

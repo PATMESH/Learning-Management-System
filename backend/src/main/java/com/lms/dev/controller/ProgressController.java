@@ -1,15 +1,13 @@
-package com.example.demo.controller;
+package com.lms.dev.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.dto.ProgressRequest;
-import com.example.demo.entity.Progress;
-import com.example.demo.service.ProgressService;
+import com.lms.dev.dto.ProgressRequest;
+import com.lms.dev.service.ProgressService;
 
 @RestController
 @RequestMapping("/api/progress")
-@CrossOrigin(allowCredentials = "")
 public class ProgressController {
 
     @Autowired
