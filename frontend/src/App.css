@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .App {
   text-align: center;
 }
@@ -36,3 +40,22 @@
     transform: rotate(360deg);
   }
 }
+
+
+body::-webkit-scrollbar {
+  width: 0px;
+}
+
+/* ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(162, 0, 255);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #490054a6;
+} */

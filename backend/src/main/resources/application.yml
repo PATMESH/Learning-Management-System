@@ -1,0 +1,15 @@
+spring:
+datasource:
+driver-class-name: com.mysql.cj.jdbc.Driver
+url: jdbc:mysql://localhost:3306/lms?createDatabaseIfNotExist=true
+username: remote_user
+password: "Svp@2003!.."
+
+jpa:
+generate-ddl: true
+show-sql: true
+properties:
+hibernate:
+transaction:
+jta:
+platform: org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform
