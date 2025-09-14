@@ -8,6 +8,7 @@ import com.lms.dev.entity.Course;
 import com.lms.dev.repository.CourseRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -19,7 +20,7 @@ public class CourseService {
         return courseRepository.findAll();
     }
 
-    public Course getCourseById(Long id) {
+    public Course getCourseById(UUID id) {
         return courseRepository.findById(id).orElse(null);
     }
 
@@ -27,7 +28,7 @@ public class CourseService {
         return courseRepository.save(course);
     }
 
-    public Course updateCourse(Long id, Course updatedCourse) {
+    public Course updateCourse(UUID id, Course updatedCourse) {
         Course existingCourse = courseRepository.findById(id).orElse(null);
         if (existingCourse != null) {
             existingCourse.setCourse_name(updatedCourse.getCourse_name());
@@ -41,7 +42,7 @@ public class CourseService {
         return null;
     }
 
-    public void deleteCourse(Long id) {
+    public void deleteCourse(UUID id) {
         courseRepository.deleteById(id);
     }
 }

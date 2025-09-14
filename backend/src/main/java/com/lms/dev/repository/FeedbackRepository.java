@@ -4,5 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.lms.dev.entity.Feedback;
 
-public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
+import java.util.UUID;
+
+public interface FeedbackRepository extends JpaRepository<Feedback, UUID> {
 }

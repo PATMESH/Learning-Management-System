@@ -7,6 +7,7 @@ import com.lms.dev.entity.Feedback;
 import com.lms.dev.service.FeedbackService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/feedbacks")
@@ -16,7 +17,7 @@ public class FeedbackController {
     private FeedbackService feedbackService;
 
     @GetMapping("/{courseId}")
-    public List<Feedback> getFeedbacksForCourse(@PathVariable Long courseId) {
+    public List<Feedback> getFeedbacksForCourse(@PathVariable UUID courseId) {
         return feedbackService.getFeedbacksForCourse(courseId);
     }
 

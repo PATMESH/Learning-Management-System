@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/lms?createDatabaseIfNotExist=true
-    username: remote_user
-    password: "Svp@2003!.."
+    url: ${DB_URL:jdbc:mysql://localhost:3306/lms?createDatabaseIfNotExist=true}
+    username: ${DB_USERNAME:remote_user}
+    password: ${DB_PASSWORD:Svp@2003!..}
 
   jpa:
     generate-ddl: true
@@ -13,3 +13,16 @@ spring:
         transaction:
           jta:
             platform: org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform
+
+app:
+  jwtSecret: ${JWT_SECRET:mySecretKey1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ}
+  jwtExpirationMs: ${JWT_EXPIRATION:86400000}
+  default-admin:
+    username: ${ADMIN_USERNAME:admin}
+    password: ${ADMIN_PASSWORD:admin123}
+    email: ${ADMIN_EMAIL:admin@gmail.com}
+
+logging:
+  level:
+    com.lms.dev: ${APP_LOG_LEVEL:DEBUG}
+    org.springframework.security: ${SECURITY_LOG_LEVEL:DEBUG}

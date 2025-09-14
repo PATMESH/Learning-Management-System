@@ -1,5 +1,6 @@
 package com.lms.dev.service;
 import java.util.List;
+import java.util.UUID;
 
 import com.lms.dev.dto.DiscussionRequest;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,7 @@ public class DiscussionService {
     private final DiscussionRepository discussionRepository;
     private final CourseService courseService;
 
-    public List<Discussion> getDiscussionsCourse(Long courseId) {
+    public List<Discussion> getDiscussionsCourse(UUID courseId) {
         Course course = courseService.getCourseById(courseId);
         return discussionRepository.findByCourse(course);
     }

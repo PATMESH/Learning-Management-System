@@ -1,6 +1,8 @@
 package com.lms.dev.controller;
 
 import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,8 +33,8 @@ public class AssessmentController {
 
     @GetMapping("/user/{userId}/course/{courseId}")
     public ResponseEntity<List<Assessment>> getAssessmentsByUserAndCourse(
-            @PathVariable Long userId,
-            @PathVariable Long courseId
+            @PathVariable UUID userId,
+            @PathVariable UUID courseId
     ) {
     	User user = userService.getUserById(userId);
         Course course = courseService.getCourseById(courseId);
@@ -42,15 +44,15 @@ public class AssessmentController {
     }
     
     @GetMapping("/perfomance/{userId}")
-    public ResponseEntity<List<Assessment>> getAssessmentsByUser(@PathVariable Long userId){
+    public ResponseEntity<List<Assessment>> getAssessmentsByUser(@PathVariable UUID userId){
     	User user = userService.getUserById(userId);
     	return assessmentService.getAssessmentByUser(user);
     }
     
     @PostMapping("/add/{userId}/{courseId}")
     public ResponseEntity<Assessment> addAssessmentWithMarks(
-            @PathVariable Long userId,
-            @PathVariable Long courseId,
+            @PathVariable UUID userId,
+            @PathVariable UUID courseId,
             @RequestBody Assessment assessment) {
     	
         User user = userService.getUserById(userId);

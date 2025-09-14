@@ -8,6 +8,7 @@ import com.lms.dev.entity.Learning;
 import com.lms.dev.service.LearningService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/learning")
@@ -17,7 +18,7 @@ public class LearningController {
     private LearningService learningService;
 
     @GetMapping("/{userId}")
-    public List<Course> getLearningCourses(@PathVariable Long userId) {
+    public List<Course> getLearningCourses(@PathVariable UUID userId) {
         return learningService.getLearningCourses(userId);
     }
     
@@ -28,12 +29,11 @@ public class LearningController {
 
     @PostMapping
     public String enrollCourse(@RequestBody EnrollRequest enrollRequest) {
-    	System.out.println(enrollRequest.getCourseId() +" = "+enrollRequest.getUserId());
         return learningService.enrollCourse(enrollRequest);
     }
 
     @DeleteMapping("/{id}")
-    public void unenrollCourse(@PathVariable Long id) {
+    public void unenrollCourse(@PathVariable UUID id) {
         learningService.unenrollCourse(id);
     }
 }

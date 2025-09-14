@@ -26,7 +26,7 @@ public class LearningService {
     
     private final ProgressRepository progressRepository;
 
-    public List<Course> getLearningCourses(Long userId) {
+    public List<Course> getLearningCourses(UUID userId) {
         Optional<User> optionalUser = userRepository.findById(userId);
         
         if (optionalUser.isPresent()) {
@@ -75,7 +75,7 @@ public class LearningService {
     }
 
 
-    public void unenrollCourse(Long id) {
+    public void unenrollCourse(UUID id) {
         learningRepository.deleteById(id);
     }
 }

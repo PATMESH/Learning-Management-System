@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class QuestionService {
@@ -37,7 +38,7 @@ public class QuestionService {
         return questionRepository.save(question);
     }
 
-    public Questions updateQuestion(Long id, QuestionRequest request) {
+    public Questions updateQuestion(UUID id, QuestionRequest request) {
         Questions question = questionRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Question not found"));
 
@@ -55,20 +56,20 @@ public class QuestionService {
         return questionRepository.save(question);
     }
 
-    public void deleteQuestion(Long id) {
+    public void deleteQuestion(UUID id) {
         if (!questionRepository.existsById(id)) {
             throw new RuntimeException("Question not found");
         }
         questionRepository.deleteById(id);
     }
 
-    public List<Questions> getAllQuestionsByCourse(Long courseId) {
+    public List<Questions> getAllQuestionsByCourse(UUID courseId) {
         Course course = courseRepository.findById(courseId)
                 .orElseThrow(() -> new RuntimeException("Course not found"));
         return questionRepository.findByCourse(course);
     }
 
-    public Optional<Questions> getQuestionById(Long id) {
+    public Optional<Questions> getQuestionById(UUID id) {
         return questionRepository.findById(id);
     }
 }

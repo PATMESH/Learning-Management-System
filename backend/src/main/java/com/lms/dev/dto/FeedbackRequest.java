@@ -1,25 +1,15 @@
 package com.lms.dev.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.UUID;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class FeedbackRequest {
-
-    private Long course_id;
-
+    private UUID course_id;
     private String comment;
-
-	public Long getCourse_id() {
-		return course_id;
-	}
-
-	public void setCourse_id(Long course_id) {
-		this.course_id = course_id;
-	}
-
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
 }

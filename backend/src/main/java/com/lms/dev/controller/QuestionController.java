@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/questions")
@@ -26,25 +27,25 @@ public class QuestionController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Questions> updateQuestion(@PathVariable Long id, @RequestBody QuestionRequest request) {
+    public ResponseEntity<Questions> updateQuestion(@PathVariable UUID id, @RequestBody QuestionRequest request) {
         Questions updated = questionService.updateQuestion(id, request);
         return new ResponseEntity<>(updated, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteQuestion(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteQuestion(@PathVariable UUID id) {
         questionService.deleteQuestion(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/course/{courseId}")
-    public ResponseEntity<List<Questions>> getAllByCourse(@PathVariable Long courseId) {
+    public ResponseEntity<List<Questions>> getAllByCourse(@PathVariable UUID courseId) {
         List<Questions> questions = questionService.getAllQuestionsByCourse(courseId);
         return new ResponseEntity<>(questions, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Questions> getById(@PathVariable Long id) {
+    public ResponseEntity<Questions> getById(@PathVariable UUID id) {
         return questionService.getQuestionById(id)
                 .map(q -> new ResponseEntity<>(q, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));

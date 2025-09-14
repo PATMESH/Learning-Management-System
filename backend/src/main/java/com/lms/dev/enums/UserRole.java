@@ -1,4 +1,4 @@
-package com.lms.dev.entity;
+package com.lms.dev.enums;
 
 import lombok.Getter;
 
@@ -6,7 +6,8 @@ import lombok.Getter;
 public enum UserRole {
 
     USER("ROLE_USER"),
-    ADMIN("ROLE_ADMIN");
+    ADMIN("ROLE_ADMIN"),
+    INSTRUCTOR("ROLE_INSTRUCTOR");
 
     private final String roleName;
 

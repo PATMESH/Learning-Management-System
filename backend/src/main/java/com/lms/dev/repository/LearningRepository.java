@@ -6,7 +6,9 @@ import com.lms.dev.entity.Course;
 import com.lms.dev.entity.Learning;
 import com.lms.dev.entity.User;
 
-public interface LearningRepository extends JpaRepository<Learning, Long> {
+import java.util.UUID;
+
+public interface LearningRepository extends JpaRepository<Learning, UUID> {
 
 	Learning findByUserAndCourse(User user, Course course);
 }

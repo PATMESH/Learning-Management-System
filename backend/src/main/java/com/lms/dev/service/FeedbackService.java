@@ -11,6 +11,7 @@ import com.lms.dev.repository.CourseRepository;
 import com.lms.dev.repository.FeedbackRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -22,7 +23,7 @@ public class FeedbackService {
     @Autowired
     private CourseRepository courseRepository;
 
-    public List<Feedback> getFeedbacksForCourse(Long courseId) {
+    public List<Feedback> getFeedbacksForCourse(UUID courseId) {
         Course course = courseRepository.findById(courseId).orElse(null);
         if (course != null) {
             return course.getFeedbacks();

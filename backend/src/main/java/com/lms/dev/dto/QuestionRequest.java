@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,5 +16,5 @@ public class QuestionRequest {
     private String option3;
     private String option4;
     private String answer;
-    private Long courseId;
+    private UUID courseId;
 }

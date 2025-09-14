@@ -1,6 +1,7 @@
 package com.lms.dev.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ public class DiscussionController {
     private DiscussionService discussionService;
 
     @GetMapping("/{courseId}")
-    public ResponseEntity<List<Discussion>> getDiscussionsAndCourse(@PathVariable Long courseId) {
+    public ResponseEntity<List<Discussion>> getDiscussionsAndCourse(@PathVariable UUID courseId) {
         List<Discussion> discussions = discussionService.getDiscussionsCourse(courseId);
         return ResponseEntity.ok(discussions);
     }

@@ -14,6 +14,8 @@ import com.lms.dev.repository.CourseRepository;
 import com.lms.dev.repository.ProgressRepository;
 import com.lms.dev.repository.UserRepository;
 
+import java.util.UUID;
+
 @RequiredArgsConstructor
 @Service
 public class ProgressService {
@@ -25,8 +27,8 @@ public class ProgressService {
     private final CourseRepository courseRepository;
 
     public ResponseEntity<String> updateProgress(ProgressRequest request) {
-        Long userId = request.getUserId();
-        Long courseId = request.getCourseId();
+        UUID userId = request.getUserId();
+        UUID courseId = request.getCourseId();
         float playedTime = request.getPlayedTime();
         float duration = request.getDuration();
 
@@ -47,7 +49,7 @@ public class ProgressService {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User or course not found");
     }
 
-	public float getProgress(Long userId, Long courseId) {
+	public float getProgress(UUID userId, UUID courseId) {
 		User user = userRepository.findById(userId).orElse(null);
         Course course = courseRepository.findById(courseId).orElse(null);
 
@@ -59,8 +61,8 @@ public class ProgressService {
 	}
 
 	public ResponseEntity<String> updateDuration(ProgressRequest request) {
-        Long userId = request.getUserId();
-        Long courseId = request.getCourseId();
+        UUID userId = request.getUserId();
+        UUID courseId = request.getCourseId();
         float newDuration = request.getDuration();
 
         User user = userRepository.findById(userId).orElse(null);
