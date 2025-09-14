@@ -1,4 +1,3 @@
-// Login.js
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserContext } from "../../contexts/UserContext";
@@ -25,16 +24,9 @@ function Login() {
       const result = await authService.login(email, password);
 
       if (result.success) {
-        console.log("Login successful:", result.token);
-
         if (result.user) {
-          setUser({
-            name: result.user.name,
-            email: result.user.email,
-            id: result.user.id
-          });
+          setUser(result.user);
         }
-
         navigate("/courses");
       } else {
         setError(result.error || "Login failed. Please try again.");
@@ -46,6 +38,7 @@ function Login() {
       setIsLoading(false);
     }
   };
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
@@ -62,7 +55,6 @@ function Login() {
 
           <div className="bg-white shadow-2xl rounded-2xl p-8 border border-gray-100">
             <form autoComplete="off" onSubmit={login} className="space-y-6">
-              {/* Email */}
               <InputField
                 id="email"
                 name="email"
@@ -75,7 +67,6 @@ function Login() {
                 icon={<Mail className="h-5 w-5 text-gray-500" />}
               />
 
-              {/* Password */}
               <InputField
                 id="password"
                 name="password"
@@ -88,7 +79,6 @@ function Login() {
                 icon={<Lock className="h-5 w-5 text-gray-500" />}
               />
 
-              {/* Forgot Password Link */}
               <div className="flex items-center justify-end">
                 <Link
                   to="/forgot-password"
@@ -98,20 +88,18 @@ function Login() {
                 </Link>
               </div>
 
-              {/* Error */}
               {error && (
-                <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                <div className="bg-red-50 border border-red-200 rounded-lg p-1">
                   <p className="text-red-800 text-sm font-medium">{error}</p>
                 </div>
               )}
 
-              {/* Submit Button */}
               <button
                 type="submit"
                 disabled={isLoading}
                 className={`w-full py-4 px-6 rounded-lg font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-blue-300 ${isLoading
-                    ? "bg-gray-400 text-gray-200 cursor-not-allowed"
-                    : "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700"
+                  ? "bg-gray-400 text-gray-200 cursor-not-allowed"
+                  : "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700"
                   }`}
               >
                 {isLoading ? (
@@ -168,7 +156,6 @@ function Login() {
             </div>
           </div>
 
-          {/* Additional Features */}
           <div className="text-center">
             <p className="text-sm text-gray-500">
               By signing in, you agree to our{" "}

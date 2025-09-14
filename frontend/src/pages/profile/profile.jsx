@@ -225,7 +225,7 @@ function Profile() {
                 <InfoCard
                   icon={faPhone}
                   label="Phone Number"
-                  value={userDetails?.phno}
+                  value={userDetails?.mobileNumber}
                   iconColor="text-green-500"
                 />
                 <InfoCard

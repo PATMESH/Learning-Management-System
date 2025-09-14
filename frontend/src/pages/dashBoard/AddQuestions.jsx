@@ -24,6 +24,7 @@ import {
   faTrash,
   faList
 } from '@fortawesome/free-solid-svg-icons';
+import { adminService } from '../../api/admin.service';
 import { questionService } from '../../api/question.service';
 
 const { Title, Text } = Typography;
@@ -62,7 +63,6 @@ function AddQuestion({ courseId, onBack }) {
     }
   };
 
-  // Helper function to get actual option value based on form values
   const getActualAnswerValue = (values, selectedAnswer) => {
     const answerMap = {
       'option1': values.option1,
@@ -85,10 +85,10 @@ function AddQuestion({ courseId, onBack }) {
         option3: values.option3,
         option4: values.option4,
         answer: actualAnswerValue,
-        courseId: parseInt(courseId)
+        courseId: courseId
       };
 
-      const result = await questionService.createQuestion(questionData);
+      const result = await adminService.createQuestion(questionData);
 
       if (result.success) {
         message.success('Question added successfully!');
@@ -138,10 +138,10 @@ function AddQuestion({ courseId, onBack }) {
         option3: values.option3,
         option4: values.option4,
         answer: actualAnswerValue,
-        courseId: parseInt(courseId)
+        courseId: courseId
       };
 
-      const result = await questionService.updateQuestion(editingQuestion.id, questionData);
+      const result = await adminService.updateQuestion(editingQuestion.id, questionData);
 
       if (result.success) {
         message.success('Question updated successfully!');
@@ -159,7 +159,7 @@ function AddQuestion({ courseId, onBack }) {
 
   const handleDelete = async (questionId) => {
     try {
-      const result = await questionService.deleteQuestion(questionId);
+      const result = await adminService.deleteQuestion(questionId);
       if (result.success) {
         message.success('Question deleted successfully!');
         fetchQuestions();

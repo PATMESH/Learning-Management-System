@@ -3,10 +3,12 @@ import Courses from "./DCourses";
 import Dashboard from "./Dashboard";
 import SideBar from "./SideBar";
 import Users from "./DUsers";
+import { authService } from "../../api/auth.service";
+
 
 function AdminDashboard() {
   const [current, setCurrent] = useState("dashboard");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(authService.isAdminAuthenticated());
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -14,23 +16,29 @@ function AdminDashboard() {
   const renderContent = () => {
     switch (current) {
       case "dashboard":
-        return <Dashboard />;
+        return <Dashboard isAuthenticated = {isAuthenticated} />;
       case "user":
         return <Users />;
       case "courses":
         return <Courses />;
       default:
-        return <Dashboard />;
+        return <Dashboard isAuthenticated = {isAuthenticated}/>;
     }
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (username === "admin" && password === "admin@123") {
+    setError("");
+
+    const result = await authService.login(username, password);
+
+    if (result.success && result.user.role === "ROLE_ADMIN") {
       setIsAuthenticated(true);
       setError("");
+    } else if (result.success && result.user.role !== "ROLE_ADMIN") {
+      setError("You are not authorized as admin.");
     } else {
-      setError("Invalid username or password");
+      setError(result.error || "Invalid username or password");
     }
   };
 

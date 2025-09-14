@@ -2,7 +2,7 @@ import { API_BASE_URL } from "./constant";
 
 async function login(email, password) {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/users/login`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -10,37 +10,31 @@ async function login(email, password) {
       body: JSON.stringify({ email, password }),
     });
 
-    const data = await response.json();
+    const result = await response.json();
 
     if (response.ok) {
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("email", email);
+      const jwtData = result.data;
 
-      const userDetails = await getUserDetails(email);
-      if (userDetails.success) {
-        localStorage.setItem("name", userDetails.data.username);
-        localStorage.setItem("id", userDetails.data.id);
-
-        return {
-          success: true,
-          token: data.token,
-          user: {
-            name: userDetails.data.username,
-            email,
-            id: userDetails.data.id,
-          },
-        };
-      }
+      localStorage.setItem("token", jwtData.token);
+      localStorage.setItem("email", jwtData.email);
+      localStorage.setItem("name", jwtData.name);
+      localStorage.setItem("id", jwtData.id);
+      localStorage.setItem("role", jwtData.role);
 
       return {
         success: true,
-        token: data.token,
-        message: "Login successful but couldn't fetch user details",
+        token: jwtData.token,
+        user: {
+          id: jwtData.id,
+          name: jwtData.name,
+          email: jwtData.email,
+          role: jwtData.role,
+        },
       };
     } else {
       return {
         success: false,
-        error: data.error || "Login failed",
+        error: result.message || "Login failed",
       };
     }
   } catch (error) {
@@ -54,7 +48,7 @@ async function login(email, password) {
 
 async function register(formData) {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/users/add`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -117,23 +111,42 @@ async function getUserDetails(email) {
   }
 }
 
-function logout() {
-  localStorage.removeItem("token");
-  localStorage.removeItem("email");
-  localStorage.removeItem("name");
-  localStorage.removeItem("id");
+async function logout() {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/auth/logout`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    if (response.ok) {
+      console.log("Backend logout successful");
+    }
+
+  } catch (error) {
+    console.error("Logout error:", error);
+  } finally {
+    localStorage.clear()
+    window.location.href = "/login";
+  }
 }
 
-function isAuthenticated() {
-  return localStorage.getItem("token") !== null;
+function isAdminAuthenticated() {
+  return !!localStorage.getItem("token") && localStorage.getItem("role") === "ROLE_ADMIN";
+}
+
+function isUserAuthenticated(){
+  return !!localStorage.getItem("token") && localStorage.getItem("role") === "ROLE_USER";
 }
 
 function getCurrentUser() {
   return {
     token: localStorage.getItem("token"),
-    email: localStorage.getItem("email"),
-    name: localStorage.getItem("name"),
     id: localStorage.getItem("id"),
+    name: localStorage.getItem("name"),
+    email: localStorage.getItem("email"),
+    role: localStorage.getItem("role"),
   };
 }
 
@@ -147,7 +160,8 @@ export const authService = {
   register,
   getUserDetails,
   logout,
-  isAuthenticated,
+  isAdminAuthenticated,
+  isUserAuthenticated,
   getCurrentUser,
   getAuthHeader,
 };

@@ -25,7 +25,7 @@ const EditProfileModal = ({ visible, onCancel, userDetails, onUpdate }) => {
       form.setFieldsValue({
         username: userDetails.username,
         email: userDetails.email,
-        phno: userDetails.phno,
+        mobileNumber: userDetails.mobileNumber,
         dob: userDetails.dob ? moment(userDetails.dob) : null,
         gender: userDetails.gender,
         location: userDetails.location,
@@ -122,7 +122,7 @@ const EditProfileModal = ({ visible, onCancel, userDetails, onUpdate }) => {
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
           <Form.Item
-            name="phno"
+            name="mobileNumber"
             label="Phone Number"
             rules={[
               { pattern: /^[0-9+\-\s()]+$/, message: 'Please enter a valid phone number!' },

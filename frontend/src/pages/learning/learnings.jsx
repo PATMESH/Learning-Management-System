@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../../Components/common/Navbar";
 import { Link, useNavigate } from "react-router-dom";
+import { learningService } from "../../api/learning.service";
 
 function Learnings() {
   const userId = localStorage.getItem("id");
@@ -12,10 +13,8 @@ function Learnings() {
   useEffect(() => {
     async function fetchCourse() {
       try {
-        const response = await axios.get(
-          `http://localhost:8080/api/learning/${userId}`
-        );
-        setCourse(response.data);
+        const response = await learningService.getEnrollments(userId);
+        setCourse(response.data);        
       } catch (err) {
         console.error(err);
       } finally {

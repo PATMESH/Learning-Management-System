@@ -13,7 +13,7 @@ function RegistrationForm() {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
-    phno: "",
+    mobileNumber: "",
     password: "",
     dob: "",
     gender: "",
@@ -100,10 +100,10 @@ function RegistrationForm() {
 
                   {/* Phone */}
                   <InputField
-                    id="phno"
-                    name="phno"
+                    id="mobileNumber"
+                    name="mobileNumber"
                     type="tel"
-                    value={formData.phno}
+                    value={formData.mobileNumber}
                     onChange={handleChange}
                     icon={<Phone className="h-5 w-5 text-gray-400" />}
                     label="Phone Number"

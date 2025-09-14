@@ -1,14 +1,9 @@
-import { API_BASE_URL } from "./constant";
+import api from "./api";
 
 async function getAllCourses() {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/courses`);
-    if (!response.ok) throw new Error("Failed to fetch courses");
-
-    return {
-      success: true,
-      data: await response.json(),
-    };
+    const { data } = await api.get("/api/courses");
+    return { success: true, data };
   } catch (error) {
     console.error("Error fetching courses:", error);
     return { success: false, error: "Could not fetch courses" };
@@ -17,13 +12,8 @@ async function getAllCourses() {
 
 async function getCourseById(courseId) {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/courses/${courseId}`);
-    if (!response.ok) throw new Error("Failed to fetch course");
-
-    return {
-      success: true,
-      data: await response.json(),
-    };
+    const { data } = await api.get(`/api/courses/${courseId}`);
+    return { success: true, data };
   } catch (error) {
     console.error("Error fetching course:", error);
     return { success: false, error: "Could not fetch course details" };
@@ -32,55 +22,40 @@ async function getCourseById(courseId) {
 
 async function getFeedbacks(courseId) {
   try {
-    const res = await fetch(`${API_BASE_URL}/api/feedbacks/${courseId}`);
-    if (!res.ok) throw new Error("Failed to fetch feedbacks");
-    return { success: true, data: await res.json() };
-  } catch (err) {
-    console.error("Error fetching feedbacks:", err);
+    const { data } = await api.get(`/api/feedbacks/${courseId}`);
+    return { success: true, data };
+  } catch (error) {
+    console.error("Error fetching feedbacks:", error);
     return { success: false, error: "Unable to fetch feedbacks" };
   }
 }
 
 async function postFeedback(courseId, comment) {
   try {
-    const res = await fetch(`${API_BASE_URL}/api/feedbacks`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ comment, course_id: courseId }),
-    });
-
-    if (!res.ok) throw new Error("Failed to post feedback");
-
+    await api.post("/api/feedbacks", { comment, course_id: courseId });
     return { success: true };
-  } catch (err) {
-    console.error("Error posting feedback:", err);
+  } catch (error) {
+    console.error("Error posting feedback:", error);
     return { success: false, error: "Unable to post feedback" };
   }
 }
 
 async function getMessages(courseId) {
   try {
-    const res = await fetch(`${API_BASE_URL}/api/discussions/${courseId}`);
-    if (!res.ok) throw new Error("Failed to fetch messages");
-    return { success: true, data: await res.json() };
-  } catch (err) {
-    console.error("Error fetching messages:", err);
+    const { data } = await api.get(`/api/discussions/${courseId}`);
+    return { success: true, data };
+  } catch (error) {
+    console.error("Error fetching messages:", error);
     return { success: false, error: "Unable to fetch messages" };
   }
 }
 
 async function addMessage(formData) {
   try {
-    const res = await fetch(`${API_BASE_URL}/api/discussions/addMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-
-    if (!res.ok) throw new Error("Failed to add message");
-    return { success: true, data: await res.json() };
-  } catch (err) {
-    console.error("Error adding message:", err);
+    const { data } = await api.post("/api/discussions/addMessage", formData);
+    return { success: true, data };
+  } catch (error) {
+    console.error("Error adding message:", error);
     return { success: false, error: "Unable to add message" };
   }
 }

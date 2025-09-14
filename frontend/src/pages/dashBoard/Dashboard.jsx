@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { adminService } from "../../api/admin.service";
-import AdminLayout from "./AdminDashboard";
+import { authService } from "../../api/auth.service";
 
-function Dashboard() {
+function Dashboard({isAuthenticated}) {
   const [userscount, setUserscount] = useState(0);
   const [coursescount, setCoursescount] = useState(0);
   const [enrolled, setEnrolled] = useState(0);
 
   useEffect(() => {
+
+    if(!isAuthenticated){
+      return;
+    } 
+    
     async function fetchData() {
       const usersRes = await adminService.getAllUsers();
       if (usersRes.success) setUserscount(usersRes.data.length);
@@ -20,7 +25,7 @@ function Dashboard() {
     }
 
     fetchData();
-  }, []);
+  }, [isAuthenticated]);
 
   return (
     <>

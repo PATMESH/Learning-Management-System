@@ -26,7 +26,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/addquestions/:id" element={<AddQuestions/>}/>
-          <Route path='/dashboard' Component={AdminDashboard}></Route>
+          <Route path='/admin' Component={AdminDashboard}></Route>
           <Route path='/login' Component={Login}></Route>
           <Route path='/register' Component={Register}></Route>
           <Route path='/' Component={Home}></Route>

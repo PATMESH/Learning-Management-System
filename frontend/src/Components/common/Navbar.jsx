@@ -4,20 +4,17 @@ import { useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faChalkboardUser } from "@fortawesome/free-solid-svg-icons";
+import { authService } from "../../api/auth.service";
 
 function Navbar(props) {
   const value = props.page;
   const navigate = useNavigate();
-  const authToken = localStorage.getItem("token");
+  const [isAuthenticated, setIsAuthenticated] = useState(authService.isUserAuthenticated());
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const handleLogOut = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("email");
-    localStorage.removeItem("name");
-    localStorage.removeItem("id");
-    localStorage.removeItem("profileImage");
-    navigate("/");
+  const handleLogOut = async () => {
+    await authService.logout();
+    navigate("/login");
   };
 
   const toggleMobileMenu = () => {
@@ -89,7 +86,7 @@ function Navbar(props) {
                 </Link>
               </li>
             )}
-            {authToken ? (
+            {isAuthenticated  ? (
               value === "profile" ? (
                 <li className="list-none ml-5 rounded-[5px] bg-gradient-to-r from-blue-600 to-purple-600">
                   <Link
@@ -114,7 +111,7 @@ function Navbar(props) {
             ) : (
               <></>
             )}
-            {authToken ? (
+            {isAuthenticated ? (
               value === "learnings" ? (
                 <li className="list-none ml-5 rounded-[5px] bg-gradient-to-r from-blue-600 to-purple-600">
                   <Link
@@ -139,7 +136,7 @@ function Navbar(props) {
             ) : (
               <></>
             )}
-            {authToken !== null ? (
+            {isAuthenticated ? (
               <li className="list-none ml-5">
                 <button 
                   onClick={handleLogOut} 

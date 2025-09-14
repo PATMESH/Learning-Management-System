@@ -1,10 +1,9 @@
-import { API_BASE_URL } from "./constant";
+import api from "./api";
 
 async function getUserDetails(userId) {
   try {
-    const res = await fetch(`${API_BASE_URL}/api/users/${userId}`);
-    if (!res.ok) throw new Error("Failed to fetch user details");
-    return { success: true, data: await res.json() };
+    const { data } = await api.get(`/api/users/${userId}`);
+    return { success: true, data };
   } catch (err) {
     console.error("Error fetching user details:", err);
     return { success: false, error: "Unable to fetch user details" };
@@ -13,10 +12,11 @@ async function getUserDetails(userId) {
 
 async function getProfileImage(userId) {
   try {
-    const res = await fetch(`${API_BASE_URL}/api/users/${userId}/profile-image`);
-    if (!res.ok) throw new Error("Failed to fetch profile image");
-    const blob = await res.blob();
-    return { success: true, data: URL.createObjectURL(blob) };
+    const res = await api.get(`/api/users/${userId}/profile-image`, {
+      responseType: "blob",
+    });
+    const blobUrl = URL.createObjectURL(res.data);
+    return { success: true, data: blobUrl };
   } catch (err) {
     console.error("Error fetching profile image:", err);
     return { success: false, error: "Unable to fetch profile image" };
@@ -25,36 +25,21 @@ async function getProfileImage(userId) {
 
 async function updateUser(userId, updatedData) {
   try {
-    const res = await fetch(`${API_BASE_URL}/api/users/${userId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedData),
-    });
-
-    if (!res.ok) throw new Error("Failed to update user");
-
-    return { success: true, data: await res.json() };
+    const { data } = await api.put(`/api/users/${userId}`, updatedData);
+    return { success: true, data };
   } catch (err) {
     console.error("Error updating user:", err);
     return { success: false, error: "Unable to update user" };
   }
 }
 
-
 async function uploadProfileImage(userId, file) {
   try {
     const formData = new FormData();
     formData.append("file", file);
-
-    const res = await fetch(`${API_BASE_URL}/api/users/${userId}/upload-image`, {
-      method: "POST",
-      body: formData,
+    await api.post(`/api/users/${userId}/upload-image`, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
     });
-
-    if (!res.ok) throw new Error("Failed to upload profile image");
-
     return { success: true };
   } catch (err) {
     console.error("Error uploading profile image:", err);
@@ -62,11 +47,9 @@ async function uploadProfileImage(userId, file) {
   }
 }
 
-
-
 export const profileService = {
   getUserDetails,
   getProfileImage,
   uploadProfileImage,
-  updateUser
+  updateUser,
 };
