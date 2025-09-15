@@ -14,6 +14,12 @@ spring:
           jta:
             platform: org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform
 
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+
 app:
   jwtSecret: ${JWT_SECRET:mySecretKey1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ}
   jwtExpirationMs: ${JWT_EXPIRATION:86400000}

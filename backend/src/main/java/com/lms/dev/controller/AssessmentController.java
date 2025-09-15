@@ -43,7 +43,7 @@ public class AssessmentController {
         return ResponseEntity.ok(assessments);
     }
     
-    @GetMapping("/perfomance/{userId}")
+    @GetMapping("/performance/{userId}")
     public ResponseEntity<List<Assessment>> getAssessmentsByUser(@PathVariable UUID userId){
     	User user = userService.getUserById(userId);
     	return assessmentService.getAssessmentByUser(user);

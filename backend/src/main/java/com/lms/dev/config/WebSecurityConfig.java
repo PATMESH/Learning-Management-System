@@ -3,6 +3,7 @@ package com.lms.dev.config;
 import com.lms.dev.security.jwt.JwtAuthTokenFilter;
 import com.lms.dev.security.jwt.JwtAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -23,6 +24,7 @@ import java.util.List;
 @Configuration
 @RequiredArgsConstructor
 @EnableMethodSecurity
+@Slf4j
 public class WebSecurityConfig {
 
     private final JwtAuthenticationEntryPoint unauthorizedHandler;
@@ -51,14 +53,11 @@ public class WebSecurityConfig {
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
 
                         // Courses
-                        .requestMatchers(HttpMethod.GET, "/api/courses/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/courses/**").permitAll()
+
                         .requestMatchers(HttpMethod.POST, "/api/courses/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/courses/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/courses/**").hasRole("ADMIN")
-
-                        // Users
-//                        .requestMatchers("/api/users/me").hasAnyRole("USER", "ADMIN")
-//                        .requestMatchers("/api/users/**").hasRole("ADMIN")
 
                         // Assessments, Enrollments, Feedback, Learning, Progress
                         .requestMatchers("/api/assessments/**").hasAnyRole("USER", "ADMIN")
