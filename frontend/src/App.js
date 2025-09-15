@@ -7,9 +7,6 @@ import Courses from './pages/course/Courses';
 import Profile from './pages/profile/profile';
 import Learnings from './pages/learning/learnings';
 import Home from './pages/landing/Home';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import 'boxicons/css/boxicons.min.css';
 import DUsers from './pages/dashBoard/DUsers';
 import DCourses from './pages/dashBoard/DCourses';
 import Assessment from './pages/assessment/Assessment';
@@ -43,7 +40,6 @@ function App() {
           <Route path='*' Component={ErrorPage}></Route>
         </Routes>
       </BrowserRouter>
-      <ToastContainer/>
     </div>
   );
 }

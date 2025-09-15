@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { message } from "antd";
 import { courseService } from "../../api/course.service";
 
 const Feedback = ({ courseid }) => {
@@ -12,7 +11,7 @@ const Feedback = ({ courseid }) => {
     if (res.success) {
       setFeedbacks(res.data.slice(0, 5));
     } else {
-      toast.error(res.error || "Failed to load feedbacks");
+      message.error(res.error || "Failed to load feedbacks");
     }
   };
 
@@ -22,20 +21,19 @@ const Feedback = ({ courseid }) => {
 
   const sendFeedback = async () => {
     if (!feedback.trim()) {
-      toast.warning("Please enter feedback before submitting");
+      message.warning("Please enter feedback before submitting");
       return;
     }
 
     const res = await courseService.postFeedback(courseid, feedback);
     if (res.success) {
-      toast.success("Feedback submitted 🎉");
+      message.success("Feedback submitted 🎉");
       setFeedback("");
-      fetchFeedbacks(); // refresh list
+      fetchFeedbacks();
     } else {
-      toast.error(res.error || "Failed to submit feedback");
+      message.error(res.error || "Failed to submit feedback");
     }
   };
-
 
   return (
     <div className="bg-white rounded-2xl shadow-md p-6 mt-10">

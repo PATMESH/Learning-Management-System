@@ -2,7 +2,7 @@ import api from "./api";
 
 async function getPerformanceData(userId) {
   try {
-    const { data } = await api.get(`/api/assessments/perfomance/${userId}`);
+    const { data } = await api.get(`/api/assessments/performance/${userId}`);
     return { success: true, data };
   } catch (err) {
     console.error("Error fetching performance data:", err);
