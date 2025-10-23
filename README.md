@@ -56,7 +56,7 @@ This project is a Learning Management System (LMS) built with React.js for the f
 
 ### Backend
 - **Framework:** Spring Boot  
-- **Language:** Java 17  
+- **Language:** Java  
 - **Security:** Spring Security with JWT
 - **Authentication:** Role-Based Access Control
 - **Database Integration:** Spring Data JPA
@@ -71,6 +71,14 @@ This project is a Learning Management System (LMS) built with React.js for the f
 
 ## Setup
 
+
+### Prerequisites
+- Java 17 or higher  
+- Maven 3.6+  
+- MySQL 8.0+  
+- Node.js and npm
+
+
 1. Clone the repository:
 
     ```bash
@@ -79,26 +87,44 @@ This project is a Learning Management System (LMS) built with React.js for the f
 
 2. Navigate to the frontend and backend folders and follow their respective setup instructions.
 
-3. Run the frontend (React.js) on http://localhost:3000 and the backend (Spring Boot) on http://localhost:8080.
+#Backend
 
-4. Set up the MySQL database and configure the connection.
+- Open the backend folder in IntelliJ IDEA or Spring Tool Suite (STS).
+- Update the database credentials in backend/application.properties.
+- Build and run the project from the IDE.
+
+#Frontend
+
+- Open the frontend folder in Visual Studio Code (VS Code).
+- Then the terminal, run:
+
+```bash
+    npm install
+    npm start
+```  
 
 ## Usage
 
 - Visit the application on http://localhost:3000.
 
-- As an admin, you can manage courses, create assessments, and monitor user progress. To access the admin dashboard, if your application is running locally, you can navigate to http://localhost:3000/dashboard.
+- As an admin, you can manage courses, create assessments, and monitor user progress. To access the admin dashboard, if your application is running locally, you can navigate to http://localhost:3000/admin.
+
+## Default Admin Credentials
+- Email: admin@gmail.com
+- Password: admin123
 
 - Users can register, log in, view courses, take assessments, and receive certificates.
 
 ## API Documentation
+
 - Access interactive API docs at:
-- http://localhost:8080/swagger-ui/index.html
+  http://localhost:8080/swagger-ui/index.html
 
 ## Contributing
 
-Feel free to contribute to the project by opening issues or submitting pull requests. Your feedback is highly appreciated!
-
+- Open issues to report bugs or suggest features
+- Submit pull requests to improve the project
+- Feedback and contributions are highly appreciated
 
 ## Site Images
 **Login:**
