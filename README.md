@@ -193,6 +193,7 @@ This project is a Learning Management System (LMS) built with React.js for the f
 
 
 **Home page:**
-![Screenshot (80)](https://github.com/PATMESH/Learning-Management-System/assets/101879714/8d67282c-0043-4ed6-ae9d-956489b27e55)
-![Screenshot (81)](https://github.com/PATMESH/Learning-Management-System/assets/101879714/956f27e9-3552-4411-8ff5-d2cdc640c240)
-![Screenshot (82)](https://github.com/PATMESH/Learning-Management-System/assets/101879714/a6550a77-605c-46e9-b038-fd2b1949575b)
+<img width="1512" height="859" alt="image" src="https://github.com/user-attachments/assets/d7d5cd46-8981-48cf-bf0a-5efe43b7e58c" />
+<img width="1512" height="851" alt="image" src="https://github.com/user-attachments/assets/ee1fcd65-4c35-45ae-9ead-2eeabdad3042" />
+<img width="1512" height="856" alt="image" src="https://github.com/user-attachments/assets/3a1d890d-e597-40fb-9fba-481a903818ea" />
+
