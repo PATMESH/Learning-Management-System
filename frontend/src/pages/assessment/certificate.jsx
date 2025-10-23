@@ -201,7 +201,7 @@ const Certificate = () => {
         <div className="text-center mb-8">
           <button
             onClick={() => navigate(-1)}
-            className="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-white hover:bg-gray-50 text-gray-700 rounded-lg shadow-md transition-all duration-200 hover:shadow-lg"
+            className="absolute left-10 top-0 mt-4 ml-0 inline-flex items-center gap-2 px-4 py-2 bg-white hover:bg-gray-50 text-gray-700 rounded-lg shadow-md transition-all duration-200 hover:shadow-lg"
           >
             <FontAwesomeIcon icon={faArrowLeft} />
             Back

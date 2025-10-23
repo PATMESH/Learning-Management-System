@@ -1,17 +1,20 @@
-export function InputField({ 
-  id, 
-  name, 
-  label, 
-  type = "text", 
-  value, 
-  onChange, 
-  placeholder, 
-  required, 
-  icon 
+export function InputField({
+  id,
+  name,
+  label,
+  type = "text",
+  value,
+  onChange,
+  placeholder,
+  required,
+  icon
 }) {
   return (
     <div className="space-y-2">
-      <label htmlFor={id} className="block text-sm font-semibold text-gray-700">
+      <label
+        htmlFor={id}
+        className="block font-semibold bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent mb-1"
+      >
         {label}
       </label>
 

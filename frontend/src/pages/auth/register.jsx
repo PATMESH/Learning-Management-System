@@ -145,7 +145,7 @@ function RegistrationForm() {
 
                   {/* Gender */}
                   <div className="space-y-2">
-                    <label htmlFor="gender" className="block text-sm font-semibold text-gray-700">
+                    <label htmlFor="gender" className="block font-semibold bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
                       Gender
                     </label>
                     <select

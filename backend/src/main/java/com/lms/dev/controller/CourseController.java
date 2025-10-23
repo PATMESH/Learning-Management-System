@@ -33,7 +33,7 @@ public class CourseController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     public Course updateCourse(@PathVariable UUID id, @RequestBody Course updatedCourse) {
         return courseService.updateCourse(id, updatedCourse);
     }

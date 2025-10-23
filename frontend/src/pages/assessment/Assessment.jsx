@@ -10,7 +10,7 @@ function Assessment() {
   const navigate = useNavigate();
   const courseId = location.pathname.split("/")[2];
   const [test, setTest] = useState([]);
-  const [userId, setUserId] = useState(localStorage.getItem("id"));
+  const [userId] = useState(localStorage.getItem("id"));
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [correctCount, setCorrectCount] = useState(0);
   const [openModal, setOpenModal] = useState(false);
@@ -25,57 +25,38 @@ function Assessment() {
       if (result.success) {
         setTest(result.data);
         setTotalQsns(result.data.length);
-      } else {
-        console.error("Failed to fetch questions:", result.error);
       }
       setLoading(false);
     };
-
     fetchQuestions();
   }, [courseId]);
 
-  const handleAnswerChange = (questionIndex, selectedOption) => {
-    const question = test[questionIndex];
-    const questionId = question.no;
-
+  const handleAnswerChange = (questionId, selectedOption) => {
+    const question = test.find(q => q.id === questionId);
     const prevAnswer = selectedAnswers[questionId];
-
     const updatedSelectedAnswers = { ...selectedAnswers };
+    let scoreChange = 0;
 
     if (prevAnswer === selectedOption) {
       delete updatedSelectedAnswers[questionId];
-      if (question.answer === selectedOption) {
-        setCorrectCount(prev => prev - 1);
-      }
+      if (question.answer === selectedOption) scoreChange = -1;
     } else {
       updatedSelectedAnswers[questionId] = selectedOption;
-
-      let scoreChange = 0;
-      if (prevAnswer) {
-        if (question.answer === prevAnswer) scoreChange -= 1;
-        if (question.answer === selectedOption) scoreChange += 1;
-      } else {
-        if (question.answer === selectedOption) scoreChange += 1;
-      }
-
-      setCorrectCount(prev => prev + scoreChange);
+      if (prevAnswer && question.answer === prevAnswer) scoreChange -= 1;
+      if (question.answer === selectedOption) scoreChange += 1;
     }
 
     setSelectedAnswers(updatedSelectedAnswers);
+    setCorrectCount(prev => prev + scoreChange);
   };
 
   const handleSubmit = async () => {
     setSubmitting(true);
     const marks = totalQsns > 0 ? (correctCount / totalQsns) * 100 : 0;
-
     const result = await assessmentService.submitAssessment(userId, courseId, marks);
     setSubmitting(false);
-
-    if (result.success) {
-      setOpenModal(true);
-    } else {
-      alert("Failed to submit assessment. Please try again.");
-    }
+    if (result.success) setOpenModal(true);
+    else alert("Failed to submit assessment. Please try again.");
   };
 
   const handleReset = () => {
@@ -106,7 +87,6 @@ function Assessment() {
   return (
     <div className="min-h-screen py-8 bg-gradient-to-br from-indigo-50 via-white to-purple-50">
       <div className="mx-auto px-6 max-w-7xl">
-        {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <button
             onClick={() => navigate(`/course/${courseId}`)}
@@ -131,7 +111,7 @@ function Assessment() {
         <div className="space-y-6">
           {test.map((question, index) => (
             <div
-              key={question.no}
+              key={question.id}
               className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
             >
               <div className="bg-indigo-100 border-b border-indigo-200 p-4 text-start">
@@ -143,23 +123,28 @@ function Assessment() {
               <div className="p-6 space-y-3">
                 {[question.option1, question.option2, question.option3, question.option4].map((option, optionIndex) => (
                   <label
-                    key={optionIndex}
-                    className={`flex items-center p-2 rounded-xl cursor-pointer transition-all duration-200 ${selectedAnswers[question.no] === option
+                    key={`${question.id}-${optionIndex}`}
+                    className={`flex items-center p-2 rounded-xl cursor-pointer transition-all duration-200 ${
+                      selectedAnswers[question.id] === option
                         ? 'bg-indigo-100 border-2 border-indigo-500 text-indigo-800'
                         : 'bg-gray-50 hover:bg-gray-100 border-2 border-transparent'
-                      }`}
+                    }`}
                   >
                     <input
-                      type="checkbox"
-                      checked={selectedAnswers[question.no] === option}
-                      onChange={() => handleAnswerChange(index, option)}
+                      type="radio"
+                      name={`question-${question.id}`}
+                      checked={selectedAnswers[question.id] === option}
+                      onChange={() => handleAnswerChange(question.id, option)}
                       className="sr-only"
                     />
-                    <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center mr-3 ${selectedAnswers[question.no] === option
-                        ? 'border-indigo-500 bg-indigo-500'
-                        : 'border-gray-300'
-                      }`}>
-                      {selectedAnswers[question.no] === option && (
+                    <div
+                      className={`w-4 h-4 rounded-full border-2 flex items-center justify-center mr-3 ${
+                        selectedAnswers[question.id] === option
+                          ? 'border-indigo-500 bg-indigo-500'
+                          : 'border-gray-300'
+                      }`}
+                    >
+                      {selectedAnswers[question.id] === option && (
                         <FontAwesomeIcon icon={faCheck} className="text-white text-xs" />
                       )}
                     </div>
@@ -171,7 +156,6 @@ function Assessment() {
           ))}
         </div>
 
-        {/* Action Buttons */}
         <div className="flex justify-center gap-4 mt-8">
           <button
             onClick={handleReset}
@@ -182,10 +166,11 @@ function Assessment() {
           <button
             onClick={handleSubmit}
             disabled={submitting || Object.keys(selectedAnswers).length !== totalQsns}
-            className={`px-8 py-3 rounded-xl font-semibold transition-all duration-200 hover:shadow-lg ${submitting || Object.keys(selectedAnswers).length !== totalQsns
+            className={`px-8 py-3 rounded-xl font-semibold transition-all duration-200 hover:shadow-lg ${
+              submitting || Object.keys(selectedAnswers).length !== totalQsns
                 ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                 : 'bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white'
-              }`}
+            }`}
           >
             {submitting ? (
               <>
