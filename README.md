@@ -87,13 +87,13 @@ This project is a Learning Management System (LMS) built with React.js for the f
 
 2. Navigate to the frontend and backend folders and follow their respective setup instructions.
 
-#Backend
+## Backend
 
 - Open the backend folder in IntelliJ IDEA or Spring Tool Suite (STS).
 - Update the database credentials in backend/application.properties.
 - Build and run the project from the IDE.
 
-#Frontend
+## Frontend
 
 - Open the frontend folder in Visual Studio Code (VS Code).
 - Then the terminal, run:
