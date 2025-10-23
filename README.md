@@ -4,49 +4,70 @@
 
 This project is a Learning Management System (LMS) built with React.js for the frontend, Spring Boot for the backend, and MySQL as the database. It provides a comprehensive platform for managing online courses, user profiles, assessments, progress tracking, and more.
 
+---
+
 ## Features
 
-- **User Management:**
-  - User registration and login functionality.
-  - User profiles with the ability to update information.
+### 🧑‍💻 User Management
+- User registration and login functionality.
+- User profiles with the ability to update information.
 
-- **Course Management:**
-  - Admin can add, edit, and manage courses.
-  - Course details include name, instructor, description, etc.
-  
-- **Assessment:**
-  - Users can take assessments related to courses.
-  - Admin can create and manage assessment questions.
+### 📚 Course Management
+- Admin can add, edit, and manage courses.
+- Course details include name, instructor, description, and more.
 
-- **Progress Tracking:**
-  - Monitor user progress and completion status.
-  - Visual representation of progress for users.
+### 🧾 Assessment
+- Users can take assessments related to courses.
+- Admin can create and manage assessment questions.
 
-- **Certificate Generation:**
-  - Automatic certificate generation upon course completion.
-  - Personalized certificates with user details.
+### 📊 Progress Tracking
+- Monitor user progress and completion status.
+- Visual representation of user progress.
 
-- **Discussion Forum:**
-  - Course-specific discussion forums for users.
-  - Interaction between users and instructors.
+### 🏆 Certificate Generation
+- Automatic certificate generation upon course completion.
+- Personalized certificates with user details.
 
-- **Admin DashBoard:**
-  - For course addition and assessment question addition.
-  - tracking of students, coursees, and enrollments. 
+### 💬 Discussion Forum
+- Course-specific discussion forums for users.
+- Interaction between users and instructors.
 
-## Technologies Used
+### 🛡️ Authentication & Security
+- JWT token-based authentication.
+- Role-based access control (**ADMIN**, **USER**).
+- Secure password encryption.
+- Default admin account for initial setup.
+- *Note: INSTRUCTOR role will be implemented soon.*
 
-- **Frontend:**
-  - React.js
-  - Styled with CSS
+### 🖥️ Admin Dashboard
+- Manage courses and assessment questions.
+- Track students, courses, and enrollments.
 
-- **Backend:**
-  - Spring Boot
-  - RESTful API architecture
+--- 
 
-- **Database:**
-  - MySQL
-  - Seven tables: course, learning, progress, discussion, feedback, question, user, assessment
+## 🧠 Technologies Used
+
+### Frontend
+- **Core Framework:** React, React DOM, React Router  
+- **UI Components:** Ant Design, Lucide Icons, FontAwesome
+- **Styling:** Tailwind CSS  
+- **API Communication:** Axios
+- **Additional Libraries:** React Player, jsPDF, html2canvas, Moment.js, React DOM Confetti
+
+### Backend
+- **Framework:** Spring Boot  
+- **Language:** Java 17  
+- **Security:** Spring Security with JWT
+- **Authentication:** Role-Based Access Control
+- **Database Integration:** Spring Data JPA
+- **Architecture:** RESTful API
+- **Build Tool:** Maven
+
+### Database
+- **MySQL**
+- **Tables:** course, learning, progress, discussion, feedback, question, user, assessment
+
+---
 
 ## Setup
 
@@ -69,6 +90,10 @@ This project is a Learning Management System (LMS) built with React.js for the f
 - As an admin, you can manage courses, create assessments, and monitor user progress. To access the admin dashboard, if your application is running locally, you can navigate to http://localhost:3000/dashboard.
 
 - Users can register, log in, view courses, take assessments, and receive certificates.
+
+## API Documentation
+- Access interactive API docs at:
+- http://localhost:8080/swagger-ui/index.html
 
 ## Contributing
 
