@@ -1,4 +1,4 @@
-# Online Learning Management System
+# Learning Management System
 
 ## Overview
 
